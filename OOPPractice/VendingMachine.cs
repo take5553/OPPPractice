@@ -67,7 +67,7 @@ namespace OOPPractice
             return new Drink(kindOfDrink);
         }
 
-        public int refund()
+        public int Refund()
         {
             int result = charge;
             charge = 0;
