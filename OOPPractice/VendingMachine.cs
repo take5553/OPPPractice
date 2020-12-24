@@ -15,41 +15,41 @@ namespace OOPPractice
         int charge = 0;
 
 
-        public Drink Buy(int i, int kindOfDrink)
+        public Drink Buy(int payment, int kindOfDrink)
         {
-            if((i != 100) && (i != 500))
+            if((payment != 100) && (payment != 500))
             {
-                charge += i;
+                charge += payment;
                 return null;
             }
 
             if((kindOfDrink == Drink.COKE) && (quantityOfCoke == 0))
             {
-                charge += i;
+                charge += payment;
                 return null;
             } else if ((kindOfDrink == Drink.DIET_COKE) && (quantityOfDietCoke == 0))
             {
-                charge += i;
+                charge += payment;
                 return null;
             } else if ((kindOfDrink == Drink.TEA) && (quantityOfTea == 0))
             {
-                charge += i;
+                charge += payment;
                 return null;
             }
 
-            if(i == 500 && numberOf100Yen < 4)
+            if(payment == 500 && numberOf100Yen < 4)
             {
-                charge += i;
+                charge += payment;
                 return null;
             }
 
-            if (i == 100)
+            if (payment == 100)
             {
                 numberOf100Yen++;
-            } else if (i == 500)
+            } else if (payment == 500)
             {
-                charge += (i - 100);
-                numberOf100Yen -= (i - 100) / 100;
+                charge += (payment - 100);
+                numberOf100Yen -= (payment - 100) / 100;
             }
 
             if (kindOfDrink == Drink.COKE)
