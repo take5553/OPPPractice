@@ -11,8 +11,8 @@ namespace OOPPractice
         Stock stockOfCoke = new Stock(5);
         Stock stockOfDietCoke = new Stock(5);
         Stock stockOfTea = new Stock(5);
-        Stack<Coin> numberOf100Yen = new Stack<Coin>();
-        List<Coin> change = new List<Coin>();
+        StockOf100Yen stockOf100Yen = new StockOf100Yen();
+        Change change = new Change();
 
 
         public Drink Buy(Coin payment, DrinkType kindOfDrink)
@@ -40,7 +40,7 @@ namespace OOPPractice
             }
 
             // 500円入ってきた時、おつりとしての100円硬貨が4枚未満なら返金
-            if(payment.Amount == Coin.FIVE_HUNDRED && numberOf100Yen.Count < 4)
+            if(payment.Amount == Coin.FIVE_HUNDRED && stockOf100Yen.Size() < 4)
             {
                 change.Add(payment);
                 return null;
@@ -51,10 +51,10 @@ namespace OOPPractice
             // 100円が入ってきた時は金庫にストック、500円が入ってきた時は金庫から100円4枚出す
             if (payment.Amount == Coin.ONE_HUNDRED)
             {
-                numberOf100Yen.Push(payment);
+                stockOf100Yen.Push(payment);
             } else if (payment.Amount == Coin.FIVE_HUNDRED)
             {
-                change.AddRange(calculateChange());
+                change.Add(calculateChange());
             }
 
             // ドリンクの在庫を一つ減らす
@@ -74,19 +74,19 @@ namespace OOPPractice
             return new Drink(kindOfDrink);
         }
 
-        private List<Coin> calculateChange()
+        private Change calculateChange()
         {
-            List<Coin> ret = new List<Coin>();
+            Change ret = new Change();
             for (int i = 0; i < 4; i++)
             {
-                ret.Add(numberOf100Yen.Pop());
+                ret.Add(stockOf100Yen.Pop());
             }
             return ret;
         }
 
-        public List<Coin> Refund()
+        public Change Refund()
         {
-            List<Coin> result = new List<Coin>(change);
+            Change result = this.change.Clone();
             change.Clear();
             return result;
         }
