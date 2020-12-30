@@ -8,22 +8,30 @@ namespace OOPPractice
 {
     class Coin
     {
-        public const int ONE_HUNDRED = 100;
-        public const int FIVE_HUNDRED = 500; 
+        public static readonly Coin ONE_HUNDRED = new Coin(new Money(100));
+        public static readonly Coin FIVE_HUNDRED = new Coin(new Money(500)); 
 
-        private int amount;
+        private Money amount;
 
-        public Coin(int amount)
+        public Coin(Money amount)
         {
             this.amount = amount;
         }
 
-        public int Amount
+        // TODO: Getterになっている
+        public Money ToMoney()
         {
-            get
-            {
-                return this.amount;
-            }
+            return this.amount;
+        }
+
+        public bool Equals(Coin comparison)
+        {
+            return this.amount.Equals(comparison.amount);
+        }
+
+        public bool DoesNotEqual(Coin comparison)
+        {
+            return this.amount.DoesNotEqual(comparison.amount);
         }
     }
 }

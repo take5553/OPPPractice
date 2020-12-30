@@ -16,12 +16,19 @@ namespace OOPPractice
             this.kind = kind;
         }
 
-        public DrinkType Kind
+        public bool IsCoke()
         {
-            get
-            {
-                return this.kind;
-            }
+            return this.kind == DrinkType.COKE;
+        }
+
+        public bool IsDietCoke()
+        {
+            return this.kind == DrinkType.DIET_COKE;
+        }
+
+        public bool IsTea()
+        {
+            return this.kind == DrinkType.TEA;
         }
 
     }

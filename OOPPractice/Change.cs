@@ -30,12 +30,12 @@ namespace OOPPractice
             this.coins.AddRange(change.coins);
         }
 
-        public int GetAmount()
+        public Money GetAmount()
         {
-            int ret = 0;
+            Money ret = new Money(0);
             foreach (Coin coin in this.coins)
             {
-                ret += coin.Amount;
+                ret = coin.ToMoney().Add(ret);
             }
             return ret;
         }

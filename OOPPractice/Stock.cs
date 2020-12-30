@@ -15,17 +15,14 @@ namespace OOPPractice
             this.quantity = quantity;
         }
 
-        public int Quantity
-        {
-            get
-            {
-                return this.quantity;
-            }
-        }
-
         public void Decrement()
         {
             this.quantity--;
+        }
+
+        public bool IsEmpty()
+        {
+            return this.quantity == 0;
         }
     }
 }

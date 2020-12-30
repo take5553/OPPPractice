@@ -18,29 +18,29 @@ namespace OOPPractice
         public Drink Buy(Coin payment, DrinkType kindOfDrink)
         {
             // 入ってくる金額paymentが100円でないかつ500円でないならば、返金
-            if((payment.Amount != Coin.ONE_HUNDRED) && (payment.Amount != Coin.FIVE_HUNDRED))
+            if((payment.DoesNotEqual(Coin.ONE_HUNDRED)) && (payment.DoesNotEqual(Coin.FIVE_HUNDRED)))
             {
                 change.Add(payment);
                 return null;
             }
 
             // 在庫が無ければ返金
-            if((kindOfDrink == DrinkType.COKE) && (stockOfCoke.Quantity == 0))
+            if((kindOfDrink == DrinkType.COKE) && (stockOfCoke.IsEmpty()))
             {
                 change.Add(payment);
                 return null;
-            } else if ((kindOfDrink == DrinkType.DIET_COKE) && (stockOfDietCoke.Quantity == 0))
+            } else if ((kindOfDrink == DrinkType.DIET_COKE) && (stockOfDietCoke.IsEmpty()))
             {
                 change.Add(payment);
                 return null;
-            } else if ((kindOfDrink == DrinkType.TEA) && (stockOfTea.Quantity == 0))
+            } else if ((kindOfDrink == DrinkType.TEA) && (stockOfTea.IsEmpty()))
             {
                 change.Add(payment);
                 return null;
             }
 
             // 500円入ってきた時、おつりとしての100円硬貨が4枚未満なら返金
-            if(payment.Amount == Coin.FIVE_HUNDRED && stockOf100Yen.Size() < 4)
+            if(payment.Equals(Coin.FIVE_HUNDRED) && stockOf100Yen.DoesNotHaveChange())
             {
                 change.Add(payment);
                 return null;
@@ -49,12 +49,12 @@ namespace OOPPractice
             // ---------- 以下、入金、在庫、お釣りに問題が無い場合 ----------
 
             // 100円が入ってきた時は金庫にストック、500円が入ってきた時は金庫から100円4枚出す
-            if (payment.Amount == Coin.ONE_HUNDRED)
+            if (payment.Equals(Coin.ONE_HUNDRED))
             {
                 stockOf100Yen.Push(payment);
-            } else if (payment.Amount == Coin.FIVE_HUNDRED)
+            } else if (payment.Equals(Coin.FIVE_HUNDRED))
             {
-                change.Add(calculateChange());
+                change.Add(stockOf100Yen.calculateChange());
             }
 
             // ドリンクの在庫を一つ減らす
@@ -74,15 +74,7 @@ namespace OOPPractice
             return new Drink(kindOfDrink);
         }
 
-        private Change calculateChange()
-        {
-            Change ret = new Change();
-            for (int i = 0; i < 4; i++)
-            {
-                ret.Add(stockOf100Yen.Pop());
-            }
-            return ret;
-        }
+
 
         public Change Refund()
         {
