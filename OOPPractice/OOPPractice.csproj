@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Coin.cs" />
     <Compile Include="Drink.cs" />
+    <Compile Include="DrinkType.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

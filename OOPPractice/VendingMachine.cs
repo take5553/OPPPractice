@@ -8,69 +8,86 @@ namespace OOPPractice
 {
     class VendingMachine
     {
-        int quantityOfCoke = 5;
-        int quantityOfDietCoke = 5;
-        int quantityOfTea = 5;
-        int numberOf100Yen = 10;
-        int charge = 0;
+        Stock stockOfCoke = new Stock(5);
+        Stock stockOfDietCoke = new Stock(5);
+        Stock stockOfTea = new Stock(5);
+        Stack<Coin> numberOf100Yen = new Stack<Coin>();
+        List<Coin> change = new List<Coin>();
 
 
-        public Drink Buy(int payment, int kindOfDrink)
+        public Drink Buy(Coin payment, DrinkType kindOfDrink)
         {
-            if((payment != 100) && (payment != 500))
+            // 入ってくる金額paymentが100円でないかつ500円でないならば、返金
+            if((payment.Amount != Coin.ONE_HUNDRED) && (payment.Amount != Coin.FIVE_HUNDRED))
             {
-                charge += payment;
+                change.Add(payment);
                 return null;
             }
 
-            if((kindOfDrink == Drink.COKE) && (quantityOfCoke == 0))
+            // 在庫が無ければ返金
+            if((kindOfDrink == DrinkType.COKE) && (stockOfCoke.Quantity == 0))
             {
-                charge += payment;
+                change.Add(payment);
                 return null;
-            } else if ((kindOfDrink == Drink.DIET_COKE) && (quantityOfDietCoke == 0))
+            } else if ((kindOfDrink == DrinkType.DIET_COKE) && (stockOfDietCoke.Quantity == 0))
             {
-                charge += payment;
+                change.Add(payment);
                 return null;
-            } else if ((kindOfDrink == Drink.TEA) && (quantityOfTea == 0))
+            } else if ((kindOfDrink == DrinkType.TEA) && (stockOfTea.Quantity == 0))
             {
-                charge += payment;
-                return null;
-            }
-
-            if(payment == 500 && numberOf100Yen < 4)
-            {
-                charge += payment;
+                change.Add(payment);
                 return null;
             }
 
-            if (payment == 100)
+            // 500円入ってきた時、おつりとしての100円硬貨が4枚未満なら返金
+            if(payment.Amount == Coin.FIVE_HUNDRED && numberOf100Yen.Count < 4)
             {
-                numberOf100Yen++;
-            } else if (payment == 500)
-            {
-                charge += (payment - 100);
-                numberOf100Yen -= (payment - 100) / 100;
+                change.Add(payment);
+                return null;
             }
 
-            if (kindOfDrink == Drink.COKE)
+            // ---------- 以下、入金、在庫、お釣りに問題が無い場合 ----------
+
+            // 100円が入ってきた時は金庫にストック、500円が入ってきた時は金庫から100円4枚出す
+            if (payment.Amount == Coin.ONE_HUNDRED)
             {
-                quantityOfCoke--;
-            } else if(kindOfDrink == Drink.DIET_COKE)
+                numberOf100Yen.Push(payment);
+            } else if (payment.Amount == Coin.FIVE_HUNDRED)
             {
-                quantityOfDietCoke--;
+                change.AddRange(calculateChange());
+            }
+
+            // ドリンクの在庫を一つ減らす
+            if (kindOfDrink == DrinkType.COKE)
+            {
+                stockOfCoke.Decrement();
+            } else if(kindOfDrink == DrinkType.DIET_COKE)
+            {
+                stockOfDietCoke.Decrement();
             }
             else
             {
-                quantityOfTea--;
+                stockOfTea.Decrement();
             }
 
+            // ドリンクを返す
             return new Drink(kindOfDrink);
         }
 
-        public int Refund()
+        private List<Coin> calculateChange()
         {
-            int result = charge;
-            charge = 0;
+            List<Coin> ret = new List<Coin>();
+            for (int i = 0; i < 4; i++)
+            {
+                ret.Add(numberOf100Yen.Pop());
+            }
+            return ret;
+        }
+
+        public List<Coin> Refund()
+        {
+            List<Coin> result = new List<Coin>(change);
+            change.Clear();
             return result;
         }
     }
