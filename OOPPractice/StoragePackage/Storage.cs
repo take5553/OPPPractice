@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OOPPractice.DrinkPackage;
 
-namespace OOPPractice
+namespace OOPPractice.StoragePackage
 {
     class Storage
     {
@@ -17,14 +18,18 @@ namespace OOPPractice
             this.stocks.Add(DrinkType.TEA, new Stock(5));
         }
 
-        public bool IsEmpty(DrinkType kindOfDrink)
+        public bool DoesNotHaveStock(DrinkType drinkType)
         {
-            return this.stocks[kindOfDrink].IsEmpty();
+            return this.stocks[drinkType].IsEmpty();
         }
 
-        public void Decrement(DrinkType kindOfDrink)
+        public Drink TakeOut(DrinkType drinkType)
         {
-            this.stocks[kindOfDrink].Decrement();
+            this.stocks[drinkType].Decrement();
+            return new Drink(drinkType);
         }
+
     }
+
+
 }

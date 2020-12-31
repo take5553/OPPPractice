@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OOPPractice
+namespace OOPPractice.MoneyPackage
 {
     class CashBox
     {
         private Stack<Coin> stackOfCoins = new Stack<Coin>();
 
-        public void Push(Coin coin)
+        public void Add(Coin coin)
         {
             this.stackOfCoins.Push(coin);
         }
