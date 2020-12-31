@@ -47,7 +47,9 @@ namespace OOPPractice
 
         public Change Clone()
         {
-            return (Change)MemberwiseClone();
+            Change ret = (Change)this.MemberwiseClone();
+            ret.coins = new List<Coin>(coins);
+            return ret;
         }
     }
 }

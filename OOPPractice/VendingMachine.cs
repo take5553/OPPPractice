@@ -8,11 +8,8 @@ namespace OOPPractice
 {
     class VendingMachine
     {
-        Stock stockOfCoke = new Stock(5);
-        Stock stockOfDietCoke = new Stock(5);
-        Stock stockOfTea = new Stock(5);
-        StockOf100Yen stockOf100Yen = new StockOf100Yen();
-        Change change = new Change();
+        Storage storage = new Storage();
+        CoinMech coinMech = new CoinMech();
 
 
         public Drink Buy(Coin payment, DrinkType kindOfDrink)
@@ -20,29 +17,21 @@ namespace OOPPractice
             // 入ってくる金額paymentが100円でないかつ500円でないならば、返金
             if((payment.DoesNotEqual(Coin.ONE_HUNDRED)) && (payment.DoesNotEqual(Coin.FIVE_HUNDRED)))
             {
-                change.Add(payment);
+                coinMech.AddChange(payment);
                 return null;
             }
 
             // 在庫が無ければ返金
-            if((kindOfDrink == DrinkType.COKE) && (stockOfCoke.IsEmpty()))
+            if(storage.IsEmpty(kindOfDrink))
             {
-                change.Add(payment);
-                return null;
-            } else if ((kindOfDrink == DrinkType.DIET_COKE) && (stockOfDietCoke.IsEmpty()))
-            {
-                change.Add(payment);
-                return null;
-            } else if ((kindOfDrink == DrinkType.TEA) && (stockOfTea.IsEmpty()))
-            {
-                change.Add(payment);
+                coinMech.AddChange(payment);
                 return null;
             }
 
             // 500円入ってきた時、おつりとしての100円硬貨が4枚未満なら返金
-            if(payment.Equals(Coin.FIVE_HUNDRED) && stockOf100Yen.DoesNotHaveChange())
+            if(payment.Equals(Coin.FIVE_HUNDRED) && coinMech.DoesNotHaveChange())
             {
-                change.Add(payment);
+                coinMech.AddChange(payment);
                 return null;
             }
 
@@ -51,24 +40,14 @@ namespace OOPPractice
             // 100円が入ってきた時は金庫にストック、500円が入ってきた時は金庫から100円4枚出す
             if (payment.Equals(Coin.ONE_HUNDRED))
             {
-                stockOf100Yen.Push(payment);
+                coinMech.AddCoinIntoCashBox(payment);
             } else if (payment.Equals(Coin.FIVE_HUNDRED))
             {
-                change.Add(stockOf100Yen.calculateChange());
+                coinMech.AddChange(coinMech.TakeOutChange());
             }
 
             // ドリンクの在庫を一つ減らす
-            if (kindOfDrink == DrinkType.COKE)
-            {
-                stockOfCoke.Decrement();
-            } else if(kindOfDrink == DrinkType.DIET_COKE)
-            {
-                stockOfDietCoke.Decrement();
-            }
-            else
-            {
-                stockOfTea.Decrement();
-            }
+            storage.Decrement(kindOfDrink);
 
             // ドリンクを返す
             return new Drink(kindOfDrink);
@@ -78,9 +57,7 @@ namespace OOPPractice
 
         public Change Refund()
         {
-            Change result = this.change.Clone();
-            change.Clear();
-            return result;
+            return this.coinMech.Refund();
         }
     }
 }
