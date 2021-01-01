@@ -37,7 +37,7 @@ namespace OOPPractice
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Drink drink = vm.Buy(Coin(500), DrinkType.COKE);
+            Drink drink = vm.Buy(new Coin(500), DrinkType.COKE);
             List<Coin> charge = vm.Refund();
 
             if (drink != null && drink.Kind == DrinkType.COKE)
