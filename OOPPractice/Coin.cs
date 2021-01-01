@@ -11,11 +11,9 @@ namespace OOPPractice
         public const int ONE_HUNDRED = 100;
         public const int FIVE_HUNDRED = 500;
 
-        private int amount;
-
         public Coin(int amount)
         {
-            this.amount = amount;
+            Amount = amount;
         }
 
         public int Amount { get; private set; }

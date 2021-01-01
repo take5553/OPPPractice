@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Change.cs" />
     <Compile Include="Coin.cs" />
     <Compile Include="Drink.cs" />
     <Compile Include="DrinkType.cs" />

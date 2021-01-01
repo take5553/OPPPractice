@@ -8,18 +8,16 @@ namespace OOPPractice
 {
     class Stock
     {
-        private int quantity;
-
         public Stock(int quantity)
         {
-            this.quantity = quantity;
+            this.Quantity = quantity;
         }
 
         public int Quantity { get; private set; }
 
         public void Decrement()
         {
-            this.quantity--;
+            this.Quantity--;
         }
 
     }

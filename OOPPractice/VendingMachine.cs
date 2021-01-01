@@ -12,7 +12,7 @@ namespace OOPPractice
         Stock stockOfDietCoke = new Stock(5);
         Stock stockOfTea = new Stock(5);
         StackOf100Yen numberOf100Yen = new StackOf100Yen();
-        List<Coin> change = new List<Coin>();
+        Change change = new Change();
 
 
         public Drink Buy(Coin payment, DrinkType kindOfDrink)
@@ -48,7 +48,7 @@ namespace OOPPractice
                 numberOf100Yen.Add(payment);
             } else if (payment.Amount == Coin.FIVE_HUNDRED)
             {
-                change.AddRange(calculateChange());
+                change.Add(calculateChange());
             }
 
             if (kindOfDrink == DrinkType.COKE)
@@ -66,9 +66,9 @@ namespace OOPPractice
             return new Drink(kindOfDrink);
         }
 
-        private List<Coin> calculateChange()
+        private Change calculateChange()
         {
-            List<Coin> ret = new List<Coin>();
+            Change ret = new Change();
             for (int i = 0; i < 4; i++)
             {
                 ret.Add(numberOf100Yen.Pop());
@@ -76,9 +76,9 @@ namespace OOPPractice
             return ret;
         }
 
-        public List<Coin> Refund()
+        public Change Refund()
         {
-            List<Coin> result = new List<Coin>(change);
+            Change result = new Change(change);
             change.Clear();
             return result;
         }
