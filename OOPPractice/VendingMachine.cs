@@ -15,7 +15,7 @@ namespace OOPPractice
         int change = 0;
 
 
-        public Drink Buy(int payment, int kindOfDrink)
+        public Drink Buy(int payment, DrinkType kindOfDrink)
         {
             if((payment != 100) && (payment != 500))
             {
@@ -23,15 +23,15 @@ namespace OOPPractice
                 return null;
             }
 
-            if((kindOfDrink == Drink.COKE) && (stockOfCoke.Quantity == 0))
+            if((kindOfDrink == DrinkType.COKE) && (stockOfCoke.Quantity == 0))
             {
                 change += payment;
                 return null;
-            } else if ((kindOfDrink == Drink.DIET_COKE) && (stockOfDietCoke.Quantity == 0))
+            } else if ((kindOfDrink == DrinkType.DIET_COKE) && (stockOfDietCoke.Quantity == 0))
             {
                 change += payment;
                 return null;
-            } else if ((kindOfDrink == Drink.TEA) && (stockOfTea.Quantity == 0))
+            } else if ((kindOfDrink == DrinkType.TEA) && (stockOfTea.Quantity == 0))
             {
                 change += payment;
                 return null;
@@ -52,10 +52,10 @@ namespace OOPPractice
                 numberOf100Yen -= (payment - 100) / 100;
             }
 
-            if (kindOfDrink == Drink.COKE)
+            if (kindOfDrink == DrinkType.COKE)
             {
                 stockOfCoke.Decrement();
-            } else if(kindOfDrink == Drink.DIET_COKE)
+            } else if(kindOfDrink == DrinkType.DIET_COKE)
             {
                 stockOfDietCoke.Decrement();
             }
