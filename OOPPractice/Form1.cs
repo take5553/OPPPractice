@@ -22,13 +22,13 @@ namespace OOPPractice
         private void button1_Click(object sender, EventArgs e)
         {
 
-            Drink drink = vm.Buy(100, DrinkType.COKE);
-            int charge = vm.Refund();
+            Drink drink = vm.Buy(new Coin(100), DrinkType.COKE);
+            List<Coin> charge = vm.Refund();
 
             if (drink != null && drink.Kind == DrinkType.COKE)
             {
                 label1.Text = "コーラを購入しました。\r";
-                label1.Text = label1.Text + "おつりは" + charge + "円です。";
+                label1.Text = label1.Text + "おつりは" + (charge.Count * Coin.ONE_HUNDRED) + "円です。";
             } else
             {
                 label1.Text = "コーラ買えんかった(´ﾟдﾟ｀)";
@@ -37,13 +37,13 @@ namespace OOPPractice
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Drink drink = vm.Buy(500, DrinkType.COKE);
-            int charge = vm.Refund();
+            Drink drink = vm.Buy(Coin(500), DrinkType.COKE);
+            List<Coin> charge = vm.Refund();
 
             if (drink != null && drink.Kind == DrinkType.COKE)
             {
                 label2.Text = "コーラを購入しました。\r";
-                label2.Text = label1.Text + "おつりは" + charge + "円です。";
+                label2.Text = label2.Text + "おつりは" + (charge.Count * Coin.ONE_HUNDRED) + "円です。";
             }
             else
             {
