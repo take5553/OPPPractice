@@ -11,7 +11,7 @@ namespace OOPPractice
         Stock stockOfCoke = new Stock(5);
         Stock stockOfDietCoke = new Stock(5);
         Stock stockOfTea = new Stock(5);
-        Stack<Coin> numberOf100Yen = new Stack<Coin>();
+        StackOf100Yen numberOf100Yen = new StackOf100Yen();
         List<Coin> change = new List<Coin>();
 
 
@@ -37,7 +37,7 @@ namespace OOPPractice
                 return null;
             }
 
-            if(payment.Amount == Coin.FIVE_HUNDRED && numberOf100Yen.Count < 4)
+            if(payment.Amount == Coin.FIVE_HUNDRED && numberOf100Yen.Count() < 4)
             {
                 change.Add(payment);
                 return null;
@@ -45,7 +45,7 @@ namespace OOPPractice
 
             if (payment.Amount == Coin.ONE_HUNDRED)
             {
-                numberOf100Yen.Push(payment);
+                numberOf100Yen.Add(payment);
             } else if (payment.Amount == Coin.FIVE_HUNDRED)
             {
                 change.AddRange(calculateChange());
