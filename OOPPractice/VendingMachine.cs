@@ -8,9 +8,9 @@ namespace OOPPractice
 {
     class VendingMachine
     {
-        int quantityOfCoke = 5;
-        int quantityOfDietCoke = 5;
-        int quantityOfTea = 5;
+        Stock stockOfCoke = new Stock(5);
+        Stock stockOfDietCoke = new Stock(5);
+        Stock stockOfTea = new Stock(5);
         int numberOf100Yen = 10;
         int change = 0;
 
@@ -23,15 +23,15 @@ namespace OOPPractice
                 return null;
             }
 
-            if((kindOfDrink == Drink.COKE) && (quantityOfCoke == 0))
+            if((kindOfDrink == Drink.COKE) && (stockOfCoke.Quantity == 0))
             {
                 change += payment;
                 return null;
-            } else if ((kindOfDrink == Drink.DIET_COKE) && (quantityOfDietCoke == 0))
+            } else if ((kindOfDrink == Drink.DIET_COKE) && (stockOfDietCoke.Quantity == 0))
             {
                 change += payment;
                 return null;
-            } else if ((kindOfDrink == Drink.TEA) && (quantityOfTea == 0))
+            } else if ((kindOfDrink == Drink.TEA) && (stockOfTea.Quantity == 0))
             {
                 change += payment;
                 return null;
@@ -54,14 +54,14 @@ namespace OOPPractice
 
             if (kindOfDrink == Drink.COKE)
             {
-                quantityOfCoke--;
+                stockOfCoke.Decrement();
             } else if(kindOfDrink == Drink.DIET_COKE)
             {
-                quantityOfDietCoke--;
+                stockOfDietCoke.Decrement();
             }
             else
             {
-                quantityOfTea--;
+                stockOfTea.Decrement();
             }
 
             return new Drink(kindOfDrink);
