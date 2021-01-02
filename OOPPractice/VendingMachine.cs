@@ -17,38 +17,38 @@ namespace OOPPractice
 
         public Drink Buy(Coin payment, DrinkType kindOfDrink)
         {
-            if((payment.Amount != Coin.ONE_HUNDRED) && (payment.Amount != Coin.FIVE_HUNDRED))
+            if(payment.DoesNotEqual(Coin.ONE_HUNDRED) && payment.DoesNotEqual(Coin.FIVE_HUNDRED))
             {
                 change.Add(payment);
                 return null;
             }
 
-            if((kindOfDrink == DrinkType.COKE) && (stockOfCoke.Quantity == 0))
+            if((kindOfDrink == DrinkType.COKE) && (stockOfCoke.IsEmpty()))
             {
                 change.Add(payment);
                 return null;
-            } else if ((kindOfDrink == DrinkType.DIET_COKE) && (stockOfDietCoke.Quantity == 0))
+            } else if ((kindOfDrink == DrinkType.DIET_COKE) && (stockOfDietCoke.IsEmpty()))
             {
                 change.Add(payment);
                 return null;
-            } else if ((kindOfDrink == DrinkType.TEA) && (stockOfTea.Quantity == 0))
-            {
-                change.Add(payment);
-                return null;
-            }
-
-            if(payment.Amount == Coin.FIVE_HUNDRED && numberOf100Yen.Count() < 4)
+            } else if ((kindOfDrink == DrinkType.TEA) && (stockOfTea.IsEmpty()))
             {
                 change.Add(payment);
                 return null;
             }
 
-            if (payment.Amount == Coin.ONE_HUNDRED)
+            if(payment.Equals(Coin.FIVE_HUNDRED) && numberOf100Yen.DoesNotHaveChange())
+            {
+                change.Add(payment);
+                return null;
+            }
+
+            if (payment.Equals(Coin.ONE_HUNDRED))
             {
                 numberOf100Yen.Add(payment);
-            } else if (payment.Amount == Coin.FIVE_HUNDRED)
+            } else if (payment.Equals(Coin.FIVE_HUNDRED))
             {
-                change.Add(calculateChange());
+                change.Add(numberOf100Yen.TakeOutChange());
             }
 
             if (kindOfDrink == DrinkType.COKE)
@@ -66,15 +66,7 @@ namespace OOPPractice
             return new Drink(kindOfDrink);
         }
 
-        private Change calculateChange()
-        {
-            Change ret = new Change();
-            for (int i = 0; i < 4; i++)
-            {
-                ret.Add(numberOf100Yen.Pop());
-            }
-            return ret;
-        }
+
 
         public Change Refund()
         {

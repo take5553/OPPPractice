@@ -41,12 +41,12 @@ namespace OOPPractice
             change.Clear();
         }
 
-        public int GetAmount()
+        public Money GetAmount()
         {
-            int ret = 0;
+            Money ret = new Money(0);
             foreach (Coin coin in change)
             {
-                ret = ret + coin.Amount;
+                ret = ret.Add(coin.ToMoney());
             }
             return ret;
         }

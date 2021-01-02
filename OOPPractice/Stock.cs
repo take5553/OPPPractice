@@ -8,16 +8,22 @@ namespace OOPPractice
 {
     class Stock
     {
+        private int quantity;
+
         public Stock(int quantity)
         {
-            this.Quantity = quantity;
+            this.quantity = quantity;
         }
 
-        public int Quantity { get; private set; }
 
         public void Decrement()
         {
-            this.Quantity--;
+            this.quantity--;
+        }
+
+        public bool IsEmpty()
+        {
+            return quantity == 0;
         }
 
     }

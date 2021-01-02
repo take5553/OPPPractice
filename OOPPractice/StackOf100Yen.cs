@@ -14,13 +14,8 @@ namespace OOPPractice
         {
             for (int i = 0; i < 4; i++)
             {
-                numberOf100Yen.Push(new Coin(Coin.ONE_HUNDRED));
+                numberOf100Yen.Push(new Coin(100));
             }
-        }
-
-        public int Count()
-        {
-            return numberOf100Yen.Count;
         }
 
         public void Add(Coin coin)
@@ -28,9 +23,19 @@ namespace OOPPractice
             numberOf100Yen.Push(coin);
         }
 
-        public Coin Pop()
+        public bool DoesNotHaveChange()
         {
-            return numberOf100Yen.Pop();
+            return numberOf100Yen.Count < 4;
+        }
+
+        public Change TakeOutChange()
+        {
+            Change ret = new Change();
+            for (int i = 0; i < 4; i++)
+            {
+                ret.Add(numberOf100Yen.Pop());
+            }
+            return ret;
         }
     }
 }
