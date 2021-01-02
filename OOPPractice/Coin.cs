@@ -8,14 +8,14 @@ namespace OOPPractice
 {
     class Coin
     {
-        public static readonly Coin ONE_HUNDRED = new Coin(100);
-        public static readonly Coin FIVE_HUNDRED = new Coin(500);
+        public static readonly Coin ONE_HUNDRED = new Coin(CoinType.ONE_HUNDRED);
+        public static readonly Coin FIVE_HUNDRED = new Coin(CoinType.FIVE_HUNDRED);
 
         private int amount;
 
-        public Coin(int amount)
+        public Coin(CoinType amount)
         {
-            this.amount = amount;
+            this.amount = (int)amount;
         }
 
         public bool Equals(Coin comparison)

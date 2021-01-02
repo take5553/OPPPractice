@@ -8,60 +8,39 @@ namespace OOPPractice
 {
     class VendingMachine
     {
-        Stock stockOfCoke = new Stock(5);
-        Stock stockOfDietCoke = new Stock(5);
-        Stock stockOfTea = new Stock(5);
-        StackOf100Yen numberOf100Yen = new StackOf100Yen();
-        Change change = new Change();
+        Storage storage = new Storage();
+        CoinMech coinMech = new CoinMech();
 
 
         public Drink Buy(Coin payment, DrinkType kindOfDrink)
         {
             if(payment.DoesNotEqual(Coin.ONE_HUNDRED) && payment.DoesNotEqual(Coin.FIVE_HUNDRED))
             {
-                change.Add(payment);
+                coinMech.AddChange(payment);
                 return null;
             }
 
-            if((kindOfDrink == DrinkType.COKE) && (stockOfCoke.IsEmpty()))
+            if (storage.IsEmpty(kindOfDrink))
             {
-                change.Add(payment);
-                return null;
-            } else if ((kindOfDrink == DrinkType.DIET_COKE) && (stockOfDietCoke.IsEmpty()))
-            {
-                change.Add(payment);
-                return null;
-            } else if ((kindOfDrink == DrinkType.TEA) && (stockOfTea.IsEmpty()))
-            {
-                change.Add(payment);
+                coinMech.AddChange(payment);
                 return null;
             }
 
-            if(payment.Equals(Coin.FIVE_HUNDRED) && numberOf100Yen.DoesNotHaveChange())
+            if(payment.Equals(Coin.FIVE_HUNDRED) && coinMech.DoesNotHaveChange())
             {
-                change.Add(payment);
+                coinMech.AddChange(payment);
                 return null;
             }
 
             if (payment.Equals(Coin.ONE_HUNDRED))
             {
-                numberOf100Yen.Add(payment);
+                coinMech.AddCoinIntoCashBox(payment);
             } else if (payment.Equals(Coin.FIVE_HUNDRED))
             {
-                change.Add(numberOf100Yen.TakeOutChange());
+                coinMech.AddChange(coinMech.TakeOutChange());
             }
 
-            if (kindOfDrink == DrinkType.COKE)
-            {
-                stockOfCoke.Decrement();
-            } else if(kindOfDrink == DrinkType.DIET_COKE)
-            {
-                stockOfDietCoke.Decrement();
-            }
-            else
-            {
-                stockOfTea.Decrement();
-            }
+            storage.Decrement(kindOfDrink);
 
             return new Drink(kindOfDrink);
         }
@@ -70,9 +49,7 @@ namespace OOPPractice
 
         public Change Refund()
         {
-            Change result = new Change(change);
-            change.Clear();
-            return result;
+            return coinMech.Refund();
         }
     }
 }

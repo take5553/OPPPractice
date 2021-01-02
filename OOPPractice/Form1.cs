@@ -23,7 +23,7 @@ namespace OOPPractice
         private void button1_Click(object sender, EventArgs e)
         {
 
-            Drink drink = vm.Buy(new Coin(100), DrinkType.COKE);
+            Drink drink = vm.Buy(new Coin(CoinType.ONE_HUNDRED), DrinkType.COKE);
             Change change = vm.Refund();
 
             if (drink != null && drink.Kind == DrinkType.COKE)
@@ -38,7 +38,7 @@ namespace OOPPractice
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Drink drink = vm.Buy(new Coin(500), DrinkType.COKE);
+            Drink drink = vm.Buy(new Coin(CoinType.FIVE_HUNDRED), DrinkType.COKE);
             Change change = vm.Refund();
 
             if (drink != null && drink.Kind == DrinkType.COKE)

@@ -6,17 +6,10 @@ using System.Threading.Tasks;
 
 namespace OOPPractice
 {
-    class StackOf100Yen
+    class CashBox
     {
         private Stack<Coin> numberOf100Yen = new Stack<Coin>();
 
-        public StackOf100Yen()
-        {
-            for (int i = 0; i < 4; i++)
-            {
-                numberOf100Yen.Push(new Coin(100));
-            }
-        }
 
         public void Add(Coin coin)
         {
