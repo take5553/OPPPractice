@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OOPPractice
+namespace OOPPractice.MoneyPackage
 {
-    enum DrinkType
+    enum CoinType
     {
-        COKE,
-        DIET_COKE,
-        TEA
+        ONE_HUNDRED = 100,
+        FIVE_HUNDRED = 500
     }
 }

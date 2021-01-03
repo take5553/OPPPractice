@@ -4,13 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OOPPractice
+namespace OOPPractice.MoneyPackage
 {
-    class FiveHundredCoin : Coin
+    class Coin
     {
-        public FiveHundredCoin()
+        protected int amount;
+
+        public Money ToMoney()
         {
-            amount = 500;
+            return new Money(this.amount);
         }
     }
 }

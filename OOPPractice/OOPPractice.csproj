@@ -46,27 +46,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Change.cs" />
-    <Compile Include="Coin.cs" />
-    <Compile Include="CoinMech.cs" />
-    <Compile Include="CoinType.cs" />
-    <Compile Include="Drink.cs" />
-    <Compile Include="DrinkType.cs" />
-    <Compile Include="FiveHundredCoin.cs" />
+    <Compile Include="MoneyPackage\Change.cs" />
+    <Compile Include="MoneyPackage\Coin.cs" />
+    <Compile Include="MoneyPackage\CoinMech.cs" />
+    <Compile Include="MoneyPackage\CoinType.cs" />
+    <Compile Include="StoragePackage\Drink.cs" />
+    <Compile Include="StoragePackage\DrinkType.cs" />
+    <Compile Include="MoneyPackage\FiveHundredCoin.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Money.cs" />
-    <Compile Include="OneHundredCoin.cs" />
-    <Compile Include="Payment.cs" />
+    <Compile Include="MoneyPackage\Money.cs" />
+    <Compile Include="MoneyPackage\OneHundredCoin.cs" />
+    <Compile Include="MoneyPackage\Payment.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="CashBox.cs" />
-    <Compile Include="Stock.cs" />
-    <Compile Include="Storage.cs" />
+    <Compile Include="MoneyPackage\CashBox.cs" />
+    <Compile Include="StoragePackage\Stock.cs" />
+    <Compile Include="StoragePackage\Storage.cs" />
     <Compile Include="VendingMachine.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

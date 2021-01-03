@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OOPPractice
+namespace OOPPractice.MoneyPackage
 {
     class Change
     {
@@ -15,12 +15,6 @@ namespace OOPPractice
             change = new List<Coin>();
         }
 
-        public Change(Coin coin)
-        {
-            change = new List<Coin>();
-            change.Add(coin);
-        }
-
         public Change(Change change)
         {
             this.change = new List<Coin>(change.change);
@@ -29,11 +23,6 @@ namespace OOPPractice
         public void Add(Coin coin)
         {
             change.Add(coin);
-        }
-
-        public void Add(Change change)
-        {
-            this.change.AddRange(change.change);
         }
 
         public void Clear()
