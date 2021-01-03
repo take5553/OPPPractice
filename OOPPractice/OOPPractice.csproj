@@ -61,6 +61,7 @@
     </Compile>
     <Compile Include="Money.cs" />
     <Compile Include="OneHundredCoin.cs" />
+    <Compile Include="Payment.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CashBox.cs" />

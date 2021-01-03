@@ -11,6 +11,13 @@ namespace OOPPractice
         private Stack<OneHundredCoin> stackOf100Yen = new Stack<OneHundredCoin>();
         private Stack<FiveHundredCoin> stackOf500Yen = new Stack<FiveHundredCoin>();
 
+        public CashBox()
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                stackOf100Yen.Push(new OneHundredCoin());
+            }
+        }
 
         public void Add(OneHundredCoin coin)
         {

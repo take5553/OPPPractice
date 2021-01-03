@@ -9,8 +9,7 @@ namespace OOPPractice
     class CoinMech
     {
         private CashBox cashBox = new CashBox();
-        private Change change = new Change();
-        private Coin coinHolder;
+        private Payment payment = new Payment();
 
         public CoinMech()
         {
@@ -22,7 +21,7 @@ namespace OOPPractice
 
         public void Put(Coin coin)
         {
-            this.coinHolder = coin;
+            payment.Hold(coin);
         }
 
         public bool DoesNotHaveChange()
@@ -32,27 +31,12 @@ namespace OOPPractice
 
         public void Commit()
         {
-            switch (coinHolder)
-            {
-                case OneHundredCoin oneHundredCoin:
-                    cashBox.Add(oneHundredCoin);
-                    change = new Change();
-                    break;
-                case FiveHundredCoin fiveHundredCoin:
-                    cashBox.Add(fiveHundredCoin);
-                    change = cashBox.TakeOutChange();
-                    break;
-            }
-
-            coinHolder = null;
-
+            payment.Commit(cashBox);
         }
 
         public Change Refund()
         {
-            Change result = new Change(change);
-            change.Clear();
-            return result;
+            return payment.Refund();
         }
     }
 }
