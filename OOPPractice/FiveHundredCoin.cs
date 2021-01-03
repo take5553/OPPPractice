@@ -6,13 +6,11 @@ using System.Threading.Tasks;
 
 namespace OOPPractice
 {
-    class Coin
+    class FiveHundredCoin : Coin
     {
-        protected int amount;
-
-        public Money ToMoney()
+        public FiveHundredCoin()
         {
-            return new Money(this.amount);
+            amount = 500;
         }
     }
 }

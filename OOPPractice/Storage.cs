@@ -17,14 +17,15 @@ namespace OOPPractice
             stocks.Add(DrinkType.TEA, new Stock(5));
         }
 
-        public bool IsEmpty(DrinkType drinkType)
+        public bool DoesNotHaveStock(DrinkType drinkType)
         {
             return stocks[drinkType].IsEmpty();
         }
 
-        public void Decrement(DrinkType drinkType)
+        public Drink TakeOut(DrinkType drinkType)
         {
             stocks[drinkType].Decrement();
+            return new Drink(drinkType);
         }
     }
 }

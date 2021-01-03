@@ -10,28 +10,19 @@ namespace OOPPractice
     {
         private CashBox cashBox = new CashBox();
         private Change change = new Change();
+        private Coin coinHolder;
 
         public CoinMech()
         {
             for (int i = 0; i < 10; i++)
             {
-                cashBox.Add(new Coin(CoinType.ONE_HUNDRED));
+                cashBox.Add(new OneHundredCoin());
             }
         }
 
-        public void AddChange(Coin payment)
+        public void Put(Coin coin)
         {
-            this.change.Add(payment);
-        }
-
-        public void AddChange(Change change)
-        {
-            this.change.Add(change);
-        }
-
-        public void AddCoinIntoCashBox(Coin payment)
-        {
-            this.cashBox.Add(payment);
+            this.coinHolder = coin;
         }
 
         public bool DoesNotHaveChange()
@@ -39,9 +30,22 @@ namespace OOPPractice
             return this.cashBox.DoesNotHaveChange();
         }
 
-        public Change TakeOutChange()
+        public void Commit()
         {
-            return this.cashBox.TakeOutChange();
+            switch (coinHolder)
+            {
+                case OneHundredCoin oneHundredCoin:
+                    cashBox.Add(oneHundredCoin);
+                    change = new Change();
+                    break;
+                case FiveHundredCoin fiveHundredCoin:
+                    cashBox.Add(fiveHundredCoin);
+                    change = cashBox.TakeOutChange();
+                    break;
+            }
+
+            coinHolder = null;
+
         }
 
         public Change Refund()

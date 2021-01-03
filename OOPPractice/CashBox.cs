@@ -8,17 +8,23 @@ namespace OOPPractice
 {
     class CashBox
     {
-        private Stack<Coin> numberOf100Yen = new Stack<Coin>();
+        private Stack<OneHundredCoin> stackOf100Yen = new Stack<OneHundredCoin>();
+        private Stack<FiveHundredCoin> stackOf500Yen = new Stack<FiveHundredCoin>();
 
 
-        public void Add(Coin coin)
+        public void Add(OneHundredCoin coin)
         {
-            numberOf100Yen.Push(coin);
+            stackOf100Yen.Push(coin);
+        }
+
+        public void Add(FiveHundredCoin coin)
+        {
+            stackOf500Yen.Push(coin);
         }
 
         public bool DoesNotHaveChange()
         {
-            return numberOf100Yen.Count < 4;
+            return stackOf100Yen.Count < 4;
         }
 
         public Change TakeOutChange()
@@ -26,9 +32,15 @@ namespace OOPPractice
             Change ret = new Change();
             for (int i = 0; i < 4; i++)
             {
-                ret.Add(numberOf100Yen.Pop());
+                ret.Add(TakeOutOneHundredCoin());
             }
             return ret;
         }
+
+        private OneHundredCoin TakeOutOneHundredCoin()
+        {
+            return stackOf100Yen.Pop();
+        }
+
     }
 }
